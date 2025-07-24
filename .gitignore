@@ -1,0 +1,7 @@
+# dependencies
+/node_modules
+/.next
+/.env.local
+
+# Sanity
+/studio/dist
