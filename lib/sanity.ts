@@ -25,9 +25,8 @@ export async function getPosts() {
     title,
     slug,
     publishedAt,
-    mainImage{
-      asset->{url}
-    }
+    excerpt,
+    mainImage
   }`
   return await client.fetch(query)
 }
