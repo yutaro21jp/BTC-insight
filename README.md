@@ -1,4 +1,4 @@
-![BTC Insight Header](/public/BTC-insight-header.png)
+![BTC Insight Header](/public/btc-insight-header.png)
 
 BTCインサイトは、「ビットコインの最新ニュースを、日本語で、わかりやすく」提供するサイトです。
 
@@ -16,7 +16,7 @@ https://diamondhandscommunity.substack.com/t/btc-insight
 - ビットコイン保有者向けの理想のモバイルウォレット：Blockstream App 様
 
 ## ロゴ
-<img src="/public/btc-insight.png" alt="BTCインサイト" width="150" height="150">
+<img src="/public/btc-insight-logo.png" alt="BTCインサイト" width="150" height="150">
 
 ビットコインの情報をキャッチするアンテナをモチーフにしています。
 
