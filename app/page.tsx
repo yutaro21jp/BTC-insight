@@ -1,56 +1,66 @@
-import { getPosts, urlFor } from '@/lib/sanity'
+
+import { client, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default async function Home() {
-  const posts = await getPosts()
+export const revalidate = 60 // ISRで1分更新
+
+type Post = {
+  _id: string
+  title: string
+  slug: { current: string }
+  publishedAt: string
+  mainImage?: {
+    asset: {
+      _ref: string
+    }
+  }
+}
+
+export default async function HomePage() {
+  const posts: Post[] = await client.fetch(`
+    *[_type == "post"] | order(publishedAt desc)[0...6] {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      mainImage
+    }
+  `)
 
   return (
-    <main className="px-4 md:px-8 py-12">
-      <div className="text-center mb-10">
-        <h1 className="text-xl md:text-2xl font-semibold mb-4">
-          ビットコインの最新ニュースを、日本語で、わかりやすく。
-        </h1>
-        <Link
-          href="https://your-newsletter-url"
-          className="inline-block bg-black text-white font-semibold px-6 py-2 rounded hover:opacity-80"
-        >
-          無料ニュースレターに登録
-        </Link>
-      </div>
+    <div className="max-w-7xl mx-auto px-4">
+      <h1 className="text-2xl font-bold text-center my-8">ビットコインの最新ニュースを、日本語で、わかりやすく。</h1>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post: any) => (
-          <Link
-            href={`/blog/${post.slug.current}`}
-            key={post._id}
-            className="rounded-lg border p-4 hover:shadow transition"
-          >
-            <div className="mb-4">
+      <div className="grid md:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <Link key={post._id} href={`/blog/${post.slug.current}`} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+            {post.mainImage && (
               <Image
-                src={
-                  post.mainImage?.asset
-                    ? urlFor(post.mainImage).width(600).height(400).fit('crop').url()
-                    : "/no-image.jpeg" // public フォルダに配置
-                }
+                src={urlFor(post.mainImage).width(800).height(400).url()}
                 alt={post.title}
-                width={600}
+                width={800}
                 height={400}
-                className="rounded object-cover"
+                className="object-cover w-full h-48"
               />
+            )}
+            <div className="p-4">
+              <p className="text-gray-500 text-sm">
+                {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
+                  year: 'numeric', month: 'long', day: 'numeric'
+                })}
+              </p>
+              <h2 className="text-lg font-bold mt-1">{post.title}</h2>
             </div>
-            <p className="text-sm text-gray-500 mb-2">
-              {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-            <h2 className="text-lg font-bold mb-1">{post.title}</h2>
-            <p className="text-sm text-gray-700 truncate">{post.excerpt}</p>
           </Link>
         ))}
       </div>
-    </main>
+
+      <div className="text-center mt-8">
+        <Link href="/blog" className="inline-block bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition">
+          ▶︎ ブログ記事をさらに見る
+        </Link>
+      </div>
+    </div>
   )
 }
