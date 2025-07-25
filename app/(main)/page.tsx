@@ -30,7 +30,17 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <h1 className="text-2xl font-bold text-center my-8">ビットコインの最新ニュースを、日本語で、わかりやすく。</h1>
+      <h1 className="text-base text-center my-8">ビットコインの最新ニュースを、日本語で、わかりやすく。</h1>
+      <div className="text-center mb-8">
+        <Link
+          href="https://diamondhandscommunity.substack.com/t/btc-insight"
+          className="inline-block bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ▶︎ 無料ニュースレターに登録
+        </Link>
+      </div>
 
       <div className="grid md:grid-cols-3 gap-6">
         {posts.map((post) => (
@@ -46,9 +56,11 @@ export default async function HomePage() {
             )}
             <div className="p-4">
               <p className="text-gray-500 text-sm">
-                {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
-                  year: 'numeric', month: 'long', day: 'numeric'
-                })}
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString('ja-JP', {
+                      year: 'numeric', month: 'long', day: 'numeric'
+                    })
+                  : '日付未設定'}
               </p>
               <h2 className="text-lg font-bold mt-1">{post.title}</h2>
             </div>

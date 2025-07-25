@@ -1,32 +1,62 @@
-import { getPosts } from '@/lib/sanity'
+
+import { client, urlFor } from '@/lib/sanity'
+import Link from 'next/link'
+import Image from 'next/image'
+
+export const revalidate = 60 // ISRで1分更新
+
+type Post = {
+  _id: string
+  title: string
+  slug: { current: string }
+  publishedAt: string
+  mainImage?: {
+    asset: {
+      _ref: string
+    }
+  }
+}
 
 export default async function BlogPage() {
-  const posts = await getPosts()
+  const posts: Post[] = await client.fetch(`
+    *[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      mainImage
+    }
+  `)
 
   return (
-    <main className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6">ブログ一覧</h1>
-      <ul className="space-y-6">
-        {posts.map((post: any) => (
-          <li key={post._id} className="border-b pb-4">
-            <a href={`/blog/${post.slug.current}`}>
-              <h2 className="text-xl font-semibold text-blue-600 hover:underline">
-                {post.title}
-              </h2>
-              <p className="text-sm text-gray-500">
-                {new Date(post.publishedAt).toLocaleDateString()}
+    <div className="max-w-7xl mx-auto px-4 pt-8">
+      
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <Link key={post._id} href={`/blog/${post.slug.current}`} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+            {post.mainImage && (
+              <Image
+                src={urlFor(post.mainImage).width(800).height(400).url()}
+                alt={post.title}
+                width={800}
+                height={400}
+                className="object-cover w-full h-48"
+              />
+            )}
+            <div className="p-4">
+              <p className="text-gray-500 text-sm">
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString('ja-JP', {
+                      year: 'numeric', month: 'long', day: 'numeric'
+                    })
+                  : '日付未設定'}
               </p>
-              {post.mainImage?.asset?.url && (
-                <img
-                  src={post.mainImage.asset.url}
-                  alt={post.title}
-                  className="mt-2 w-full h-auto rounded"
-                />
-              )}
-            </a>
-          </li>
+              <h2 className="text-lg font-bold mt-1">{post.title}</h2>
+            </div>
+          </Link>
         ))}
-      </ul>
-    </main>
+      </div>
+    </div>
   )
 }
