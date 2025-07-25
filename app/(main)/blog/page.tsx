@@ -32,7 +32,7 @@ export default async function BlogPage() {
     <div className="max-w-7xl mx-auto px-4 pt-8">
       
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
           <Link key={post._id} href={`/blog/${post.slug.current}`} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
             {post.mainImage && (

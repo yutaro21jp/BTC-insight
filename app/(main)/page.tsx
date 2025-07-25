@@ -38,11 +38,11 @@ export default async function HomePage() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          ▶︎ 無料ニュースレターに登録
+          無料ニュースレターに登録
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
           <Link key={post._id} href={`/blog/${post.slug.current}`} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
             {post.mainImage && (
