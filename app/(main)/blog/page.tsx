@@ -30,7 +30,11 @@ export default async function BlogPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-8">
-      <h1 className="text-3xl font-bold my-8 text-center">ブログ</h1>
+      <h1 className="text-3xl font-bold my-8 text-center">
+        <span className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-2xl">
+          ブログ
+        </span>
+      </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (

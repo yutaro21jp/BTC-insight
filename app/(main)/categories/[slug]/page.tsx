@@ -31,7 +31,11 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <h1 className="text-3xl font-bold my-8 text-center">{category.title}</h1>
+      <h1 className="text-3xl font-bold my-8 text-center">
+        <span className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-2xl">
+          {category.title}
+        </span>
+      </h1>
 
       {posts.length === 0 ? (
         <p className="text-center text-gray-600">このカテゴリーの記事はまだありません。</p>
