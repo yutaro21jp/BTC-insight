@@ -12,7 +12,7 @@ export default function Footer() {
           <nav className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/" className="text-gray-500 hover:text-gray-900">ホーム</Link>
             <Link href="/blog" className="text-gray-500 hover:text-gray-900">ブログ</Link>
-            <Link href="#" className="text-gray-500 hover:text-gray-900">クイズ</Link>
+            <Link href="https://diamondhandscommunity.substack.com" className="text-gray-500 hover:text-gray-900" target="_blank" rel="noopener noreferrer">後援</Link>
             <Link href="https://diamondhandscommunity.substack.com/t/btc-insight" className="text-gray-500 hover:text-gray-900" target="_blank" rel="noopener noreferrer">ニュースレター</Link>
           </nav>
         </div>
