@@ -42,10 +42,11 @@ export default async function PostPage({ params }: Props) {
       <article className="prose prose-lg">
         <PortableText value={post.body} />
       </article>
+
       {post.categories && post.categories.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-2">Categories:</h3>
-          <div className="flex flex-wrap gap-2">
+        <div className="mt-10">
+          <div className="flex items-center flex-wrap gap-2">
+            <span className="text-lg font-semibold mr-2">Categories:</span>
             {post.categories.map((category: any) => (
               <span
                 key={category.title}
@@ -57,6 +58,19 @@ export default async function PostPage({ params }: Props) {
           </div>
         </div>
       )}
+
+      <div className="mt-10 p-6 bg-gray-100 rounded-lg text-center">
+        <h2 className="text-2xl font-bold mb-4">ビットコインの最新ニュースを、日本語で、わかりやすくお届け。</h2>
+        <p className="text-gray-700 mb-6 text-left">基礎から最前線まで ──ビットコインに関する本質的な情報と技術的背景を、毎週わかりやすく解説しています。ノイズに惑わされず、確かな理解を手に入れたいあなたへ。</p>
+        <a
+          href="https://diamondhandscommunity.substack.com/t/btc-insight"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300"
+        >
+          無料ニュースレターに登録
+        </a>
+      </div>
     </main>
   )
 }
