@@ -92,6 +92,23 @@ export default async function PostPage({ params }: Props) {
         </div>
       )}
 
+      {post.tags && post.tags.length > 0 && (
+        <div className="mt-4">
+          <div className="flex items-center flex-wrap gap-2">
+            <span className="text-lg font-semibold mr-2">タグ：</span>
+            {post.tags.map((tag: any) => (
+              <Link
+                key={tag.name}
+                href={`/tags/${tag.slug.current}`}
+                className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-200 transition"
+              >
+                {tag.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mt-6 flex gap-4">
         <a
           href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(process.env.NEXT_PUBLIC_BASE_URL + '/blog/' + post.slug.current)}&text=${encodeURIComponent(post.title)}`}
