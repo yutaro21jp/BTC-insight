@@ -34,6 +34,7 @@ export async function getPosts() {
 export async function getPostBySlug(slug: string) {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
+    slug,
     publishedAt,
     mainImage,
     body,

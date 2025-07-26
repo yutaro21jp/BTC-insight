@@ -34,7 +34,7 @@ export default async function HomePage() {
       <div className="text-center mb-8">
         <Link
           href="https://diamondhandscommunity.substack.com/t/btc-insight"
-          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300"
+          className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300"
           target="_blank"
           rel="noopener noreferrer"
         >
