@@ -71,8 +71,37 @@ export default async function PostPage({ params }: Props) {
           />
         </div>
       )}
-      <article className="prose prose-lg">
-        <PortableText value={post.body} />
+      <article className="text-gray-800 leading-relaxed">
+        <PortableText
+          value={post.body}
+          components={{
+            block: {
+              h1: ({children}) => <h1 className="text-4xl font-extrabold mt-8 mb-4">{children}</h1>,
+              h2: ({children}) => <h2 className="text-3xl font-bold mt-6 mb-3">{children}</h2>,
+              h3: ({children}) => <h3 className="text-2xl font-semibold mt-5 mb-2">{children}</h3>,
+              h4: ({children}) => <h4 className="text-xl font-semibold mt-4 mb-2">{children}</h4>,
+              h5: ({children}) => <h5 className="text-lg font-semibold mt-3 mb-1">{children}</h5>,
+              h6: ({children}) => <h6 className="text-base font-semibold mt-2 mb-1">{children}</h6>,
+              normal: ({children}) => <p className="mb-4 text-lg">{children}</p>,
+              blockquote: ({children}) => <blockquote className="border-l-4 border-gray-300 pl-4 py-2 my-4 italic">{children}</blockquote>,
+            },
+            marks: {
+              link: ({children, value}) => {
+                const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined
+                return (
+                  <a href={value.href} rel={rel} className="text-blue-600 hover:underline">
+                    {children}
+                  </a>
+                )
+              },
+            },
+            list: {
+              bullet: ({children}) => <ul className="list-disc list-inside mb-4 pl-5">{children}</ul>,
+              number: ({children}) => <ol className="list-decimal list-inside mb-4 pl-5">{children}</ol>,
+            },
+            listItem: ({children}) => <li className="mb-2">{children}</li>,
+          }}
+        />
       </article>
 
       {post.categories && post.categories.length > 0 && (
