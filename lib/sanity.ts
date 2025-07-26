@@ -35,10 +35,10 @@ export async function getPostBySlug(slug: string) {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     publishedAt,
-    mainImage{
-      asset->{url}
-    },
-    body
+    mainImage,
+    body,
+    "author": author->{name, image},
+    "categories": categories[]->{title}
   }`
   return await client.fetch(query, { slug })
 }
