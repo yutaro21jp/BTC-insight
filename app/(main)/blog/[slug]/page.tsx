@@ -1,6 +1,7 @@
 import { getPostBySlug, urlFor } from '@/lib/sanity'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
   params: { slug: string }
@@ -48,12 +49,13 @@ export default async function PostPage({ params }: Props) {
           <div className="flex items-center flex-wrap gap-2">
             <span className="text-lg font-semibold mr-2">Categories:</span>
             {post.categories.map((category: any) => (
-              <span
+              <Link
                 key={category.title}
-                className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm"
+                href={`/categories/${category.slug.current}`}
+                className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300 transition"
               >
                 {category.title}
-              </span>
+              </Link>
             ))}
           </div>
         </div>

@@ -38,7 +38,25 @@ export async function getPostBySlug(slug: string) {
     mainImage,
     body,
     "author": author->{name, image},
-    "categories": categories[]->{title}
+    "categories": categories[]->{title, slug}
   }`
   return await client.fetch(query, { slug })
+}
+
+export async function getPostsByCategorySlug(categorySlug: string) {
+  const query = `*[_type == "post" && $categorySlug in categories[]->slug.current] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage
+  }`
+  return await client.fetch(query, { categorySlug })
+}
+
+export async function getCategoryBySlug(categorySlug: string) {
+  const query = `*[_type == "category" && slug.current == $categorySlug][0]{
+    title
+  }`
+  return await client.fetch(query, { categorySlug })
 }
