@@ -2,9 +2,40 @@ import { getPostBySlug, urlFor } from '@/lib/sanity'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Metadata } from 'next'
 
 type Props = {
   params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPostBySlug(params.slug)
+
+  if (!post) {
+    return {
+      title: '記事が見つかりませんでした',
+    }
+  }
+
+  const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug.current}`,
+      images: ogImage ? [{ url: ogImage }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: ogImage ? [ogImage] : [],
+    },
+  }
 }
 
 export default async function PostPage({ params }: Props) {

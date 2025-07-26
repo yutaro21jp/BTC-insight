@@ -38,6 +38,7 @@ export async function getPostBySlug(slug: string) {
     publishedAt,
     mainImage,
     body,
+    excerpt,
     "author": author->{name, image},
     "categories": categories[]->{title, slug}
   }`
