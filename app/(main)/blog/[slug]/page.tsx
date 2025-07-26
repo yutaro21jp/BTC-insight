@@ -47,7 +47,7 @@ export default async function PostPage({ params }: Props) {
       {post.categories && post.categories.length > 0 && (
         <div className="mt-10">
           <div className="flex items-center flex-wrap gap-2">
-            <span className="text-lg font-semibold mr-2">Categories:</span>
+            <span className="text-lg font-semibold mr-2">カテゴリ：</span>
             {post.categories.map((category: any) => (
               <Link
                 key={category.title}
