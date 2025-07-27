@@ -58,7 +58,15 @@ export default async function PostPage({ params }: Props) {
           className="rounded-full mr-2 object-cover"
         />
         <div>
-          {post.author?.name && <p className="text-gray-800 font-semibold">{post.author.name}</p>}
+          {post.author?.name && (
+            post.author.slug ? (
+              <Link href={`/authors/${post.author.slug}`} className="text-blue-600 font-semibold hover:underline">
+                {post.author.name}
+              </Link>
+            ) : (
+              <p className="text-gray-800 font-semibold">{post.author.name}</p>
+            )
+          )}
           <p className="text-gray-500 text-sm">公開日：{new Date(post.publishedAt).toLocaleDateString()}</p>
         </div>
       </div>

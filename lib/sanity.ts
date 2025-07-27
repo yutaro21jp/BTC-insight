@@ -51,11 +51,31 @@ export async function getPostBySlug(slug: string) {
     mainImage,
     body,
     excerpt,
-    "author": author->{name, image},
+    "author": author->{name, image, bio, "slug": slug.current},
     "categories": categories[]->{title, slug},
     "tags": tags[]->{name, slug}
   }`
   return await client.fetch(query, { slug })
+}
+
+export async function getAuthorBySlug(authorSlug: string) {
+  const query = `*[_type == "author" && slug.current == $authorSlug][0]{
+    name,
+    image,
+    bio
+  }`
+  return await client.fetch(query, { authorSlug })
+}
+
+export async function getPostsByAuthorSlug(authorSlug: string) {
+  const query = `*[_type == "post" && author->slug.current == $authorSlug] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage
+  }`
+  return await client.fetch(query, { authorSlug })
 }
 
 export async function getPostsByCategorySlug(categorySlug: string) {
