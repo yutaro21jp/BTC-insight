@@ -1,5 +1,5 @@
 
-import { client, urlFor } from '@/lib/sanity'
+import { getPosts, getWelcomePost, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -18,19 +18,18 @@ type Post = {
 }
 
 export default async function HomePage() {
-  const posts: Post[] = await client.fetch(`
-    *[_type == "post"] | order(publishedAt desc)[0...6] {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      mainImage
-    }
-  `)
+  const welcomePost = await getWelcomePost()
+  const otherPosts = await getPosts(welcomePost ? "welcome" : undefined)
+
+  let posts: Post[] = []
+  if (welcomePost) {
+    posts.push(welcomePost)
+  }
+  posts = posts.concat(otherPosts.slice(0, 6 - posts.length))
 
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <h1 className="text-base text-center my-8">ビットコインの最新ニュースを、日本語で、わかりやすく。</h1>
+      <h1 className="text-xl text-center my-8">ビットコインの最新ニュースを、日本語で、わかりやすく。</h1>
       <div className="text-center mb-8">
         <Link
           href="https://diamondhandscommunity.substack.com/t/btc-insight"

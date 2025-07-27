@@ -19,8 +19,20 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
-export async function getPosts() {
-  const query = `*[_type == "post"] | order(publishedAt desc){
+export async function getPosts(excludeSlug?: string) {
+  const query = `*[_type == "post" ${excludeSlug ? `&& slug.current != "${excludeSlug}"` : ''}] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage
+  }`
+  return await client.fetch(query)
+}
+
+export async function getWelcomePost() {
+  const query = `*[_type == "post" && slug.current == "welcome"][0]{
     _id,
     title,
     slug,
