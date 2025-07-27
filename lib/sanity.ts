@@ -55,7 +55,7 @@ export async function getPostBySlug(slug: string) {
     "categories": categories[]->{title, slug},
     "tags": tags[]->{name, slug}
   }`
-  return await client.fetch(query, { slug })
+  return await client.fetch(query, { slug }, { cache: 'no-store' })
 }
 
 export async function getAuthorBySlug(authorSlug: string) {
