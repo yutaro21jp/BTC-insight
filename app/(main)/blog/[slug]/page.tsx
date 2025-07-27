@@ -3,6 +3,7 @@ import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { Tweet } from 'react-tweet'
 
 type Props = {
   params: { slug: string }
@@ -100,6 +101,16 @@ export default async function PostPage({ params }: Props) {
               number: ({children}) => <ol className="list-decimal list-inside mb-4 pl-5">{children}</ol>,
             },
             listItem: ({children}) => <li className="mb-2">{children}</li>,
+            types: {
+              tweetEmbed: ({ value }) => {
+                const tweetId = value.url.split('/').pop()
+                return tweetId ? (
+                  <div className="flex justify-center my-8">
+                    <Tweet id={tweetId} />
+                  </div>
+                ) : null
+              },
+            },
           }}
         />
       </article>
