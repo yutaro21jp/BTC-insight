@@ -2,8 +2,26 @@
 import { client, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 export const revalidate = 60 // ISRで1分更新
+
+export const metadata: Metadata = {
+  title: 'ブログ | BTCインサイト',
+  description: 'BTCインサイトの最新ブログ記事一覧',
+  openGraph: {
+    title: 'ブログ | BTCインサイト',
+    description: 'BTCインサイトの最新ブログ記事一覧',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog`,
+    siteName: 'BTCインサイト',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'ブログ | BTCインサイト',
+    description: 'BTCインサイトの最新ブログ記事一覧',
+  },
+};
 
 type Post = {
   _id: string

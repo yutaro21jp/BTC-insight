@@ -1,11 +1,43 @@
 import { getPostsByCategorySlug, getCategoryBySlug, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 export const revalidate = 60 // ISRで1分更新
 
 type Props = {
   params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const categorySlug = params.slug
+  const category = await getCategoryBySlug(categorySlug)
+
+  if (!category) {
+    return {
+      title: 'カテゴリーが見つかりませんでした',
+    }
+  }
+
+  const siteName = 'BTCインサイト';
+  const pageTitle = `${category.title} | ${siteName}`;
+
+  return {
+    title: pageTitle,
+    description: `${category.title}のブログ記事`,
+    openGraph: {
+      title: pageTitle,
+      description: `${category.title}のブログ記事`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/categories/${category.slug.current}`,
+      siteName: siteName,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: pageTitle,
+      description: `${category.title}のブログ記事`,
+    },
+  }
 }
 
 type Post = {

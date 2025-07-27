@@ -18,13 +18,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const siteName = 'BTCインサイト';
+  const pageTitle = `${post.title} | ${siteName}`;
+
   const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
 
   return {
-    title: post.title,
+    title: pageTitle,
     description: post.excerpt,
     openGraph: {
-      title: post.title,
+      title: pageTitle,
       description: post.excerpt,
       type: 'article',
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug.current}`,
@@ -32,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
+      title: pageTitle,
       description: post.excerpt,
       images: ogImage ? [ogImage] : [],
     },
@@ -212,24 +215,33 @@ export default async function PostPage({ params }: Props) {
         </div>
       )}
 
-      <div className="mt-6 flex gap-4">
+      <div className="mt-6 flex gap-2">
         <a
           href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(process.env.NEXT_PUBLIC_BASE_URL + '/blog/' + post.slug.current)}&text=${encodeURIComponent(post.title)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+          className="bg-black hover:bg-gray-800 text-white font-bold p-2 rounded-lg flex items-center justify-center w-10 h-10"
+          aria-label="Xで共有"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.84-6.317-6.109 6.317H.727l8.49-9.71L0 1.154h7.594l4.95 5.359L18.901 1.153zm-.742 19.14L6.67 3.08H4.41l13.17 17.19h2.26z"></path></svg>
-          Xで共有
+        </a>
+        <a
+          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(process.env.NEXT_PUBLIC_BASE_URL + '/blog/' + post.slug.current)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold p-2 rounded-lg flex items-center justify-center w-10 h-10"
+          aria-label="Blueskyで共有"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.5 18h-3c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5h3c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5zm7.5-6h-3c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5h3c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5zm-6-6h-3c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5h3c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5z"/></svg>
         </a>
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(process.env.NEXT_PUBLIC_BASE_URL + '/blog/' + post.slug.current)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold p-2 rounded-lg flex items-center justify-center w-10 h-10"
+          aria-label="Facebookで共有"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.815c-3.238 0-5.185 1.237-5.185 5.007v2.993z"/></svg>
-          Facebookで共有
         </a>
       </div>
 

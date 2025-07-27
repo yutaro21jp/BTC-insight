@@ -1,11 +1,43 @@
 import { getAuthorBySlug, getPostsByAuthorSlug, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 export const revalidate = 60 // ISRで1分更新
 
 type Props = {
   params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const authorSlug = params.slug
+  const author = await getAuthorBySlug(authorSlug)
+
+  if (!author) {
+    return {
+      title: '執筆者が見つかりませんでした',
+    }
+  }
+
+  const siteName = 'BTCインサイト';
+  const pageTitle = `${author.name} | ${siteName}`;
+
+  return {
+    title: pageTitle,
+    description: `${author.name}のブログ記事`,
+    openGraph: {
+      title: pageTitle,
+      description: `${author.name}のブログ記事`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/authors/${author.slug.current}`,
+      siteName: siteName,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: pageTitle,
+      description: `${author.name}のブログ記事`,
+    },
+  }
 }
 
 type Post = {

@@ -62,7 +62,8 @@ export async function getAuthorBySlug(authorSlug: string) {
   const query = `*[_type == "author" && slug.current == $authorSlug][0]{
     name,
     image,
-    bio
+    bio,
+    "slug": slug.current
   }`
   return await client.fetch(query, { authorSlug })
 }
@@ -91,14 +92,16 @@ export async function getPostsByCategorySlug(categorySlug: string) {
 
 export async function getCategoryBySlug(categorySlug: string) {
   const query = `*[_type == "category" && slug.current == $categorySlug][0]{
-    title
+    title,
+    "slug": slug.current
   }`
   return await client.fetch(query, { categorySlug })
 }
 
 export async function getTagBySlug(tagSlug: string) {
   const query = `*[_type == "tag" && slug.current == $tagSlug][0]{
-    name
+    name,
+    "slug": slug.current
   }`
   return await client.fetch(query, { tagSlug })
 }
