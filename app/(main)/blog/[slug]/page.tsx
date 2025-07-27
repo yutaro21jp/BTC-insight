@@ -42,6 +42,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PostPage({ params }: Props) {
   const post = await getPostBySlug(params.slug)
 
+  console.log("post.mainImage data:", JSON.stringify(post?.mainImage, null, 2));
+  if (post?.mainImage) {
+    console.log("Generated Image URL:", urlFor(post.mainImage).url());
+  }
+
   if (!post) {
     return <p>記事が見つかりませんでした。</p>
   }
@@ -151,6 +156,20 @@ export default async function PostPage({ params }: Props) {
                       allowFullScreen
                       title="YouTube video player"
                     ></iframe>
+                  </div>
+                );
+              },
+              image: ({ value }) => {
+                if (!value || !value.asset || !value.asset._ref) return null;
+                return (
+                  <div className="my-8 flex justify-center">
+                    <Image
+                      src={urlFor(value).url()}
+                      alt={value.alt || ''}
+                      width={800} // 適切な幅を設定
+                      height={450} // 適切な高さを設定
+                      className="rounded-lg max-w-full h-auto"
+                    />
                   </div>
                 );
               },
