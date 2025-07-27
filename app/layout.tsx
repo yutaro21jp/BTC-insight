@@ -7,7 +7,7 @@ export const metadata = {
     icon: '/btc-insight-logo.png',
   },
   openGraph: {
-    title: 'BTCインサイト | ビットコインの最新ニュースを、日本語で、わかりやすく。',
+    title: 'BTCインサイト',
     description: 'ビットコインの最新ニュースを日本語で、わかりやすく。',
     url: process.env.NEXT_PUBLIC_BASE_URL || '/',
     siteName: 'BTCインサイト',
@@ -24,7 +24,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BTCインサイト | ビットコインの最新ニュースを、日本語で、わかりやすく。',
+    title: 'BTCインサイト',
     description: 'ビットコインの最新ニュースを日本語で、わかりやすく。',
     images: ['/no-image.png'],
   },
