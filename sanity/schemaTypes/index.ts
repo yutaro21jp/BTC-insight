@@ -6,7 +6,8 @@ import {postType} from './postType'
 import {authorType} from './authorType'
 import {tagType} from './tagType'
 import {tweetEmbedType} from './tweetEmbedType'
+import {youtubeEmbedType} from './youtubeEmbedType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blockContentType, categoryType, postType, authorType, tagType, tweetEmbedType],
+  types: [blockContentType, categoryType, postType, authorType, tagType, tweetEmbedType, youtubeEmbedType],
 }

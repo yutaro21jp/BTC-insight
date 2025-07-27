@@ -110,6 +110,30 @@ export default async function PostPage({ params }: Props) {
                   </div>
                 ) : null
               },
+              youtubeEmbed: ({ value }) => {
+                const url = value.url;
+                let videoId = null;
+
+                // Extract video ID from both standard and shortened YouTube URLs
+                const standardMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+                if (standardMatch && standardMatch[1]) {
+                  videoId = standardMatch[1];
+                }
+
+                if (!videoId) return null;
+                return (
+                  <div className="relative w-full overflow-hidden my-8" style={{ paddingTop: '56.25%' }}>
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="YouTube video player"
+                    ></iframe>
+                  </div>
+                );
+              },
             },
           }}
         />
