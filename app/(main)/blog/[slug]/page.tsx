@@ -63,14 +63,13 @@ export default async function PostPage({ params }: Props) {
         </div>
       </div>
       {post.mainImage && (
-        <div className="mb-6 relative h-96">
-          <Image
-            src={urlFor(post.mainImage).url()}
-            alt={post.title}
-            fill
-            className="rounded object-contain"
-          />
-        </div>
+        <Image
+          src={urlFor(post.mainImage).url()}
+          alt={post.title}
+          width={800} // Next.jsの最適化のための幅
+          height={400} // Next.jsの最適化のための高さ
+          className="rounded w-full h-auto mb-6"
+        />
       )}
       <article className="text-gray-800 leading-relaxed">
         <PortableText
