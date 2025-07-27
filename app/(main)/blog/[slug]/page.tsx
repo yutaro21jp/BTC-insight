@@ -50,17 +50,30 @@ export default async function PostPage({ params }: Props) {
     <main className="max-w-3xl mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
       <div className="flex items-center text-gray-500 text-sm mb-4">
-        <Image
-          src={post.author?.name === 'yutaro' ? '/yutaro.JPG' : urlFor(post.author?.image).width(60).height(60).fit('crop').url()}
-          alt={post.author?.name || 'Author'}
-          width={60}
-          height={60}
-          className="rounded-full mr-2 object-cover"
-        />
+        {post.author?.slug && (
+          <Link href={`/authors/${post.author.slug}`} className="mr-2">
+            <Image
+              src={post.author?.name === 'yutaro' ? '/yutaro.JPG' : urlFor(post.author?.image).width(60).height(60).fit('crop').url()}
+              alt={post.author?.name || 'Author'}
+              width={60}
+              height={60}
+              className="rounded-full object-cover"
+            />
+          </Link>
+        )}
+        {!post.author?.slug && (
+          <Image
+            src={post.author?.name === 'yutaro' ? '/yutaro.JPG' : urlFor(post.author?.image).width(60).height(60).fit('crop').url()}
+            alt={post.author?.name || 'Author'}
+            width={60}
+            height={60}
+            className="rounded-full mr-2 object-cover"
+          />
+        )}
         <div>
           {post.author?.name && (
             post.author.slug ? (
-              <Link href={`/authors/${post.author.slug}`} className="text-blue-600 font-semibold hover:underline">
+              <Link href={`/authors/${post.author.slug}`} className="text-gray-800 font-semibold hover:underline">
                 {post.author.name}
               </Link>
             ) : (
