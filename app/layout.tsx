@@ -13,7 +13,7 @@ export const metadata = {
     siteName: 'BTCインサイト',
     images: [
       {
-        url: '/btc-insight-logo.png',
+        url: '/no-image.png',
         width: 800,
         height: 600,
         alt: 'BTCインサイト ロゴ',
@@ -26,7 +26,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'BTCインサイト | ビットコインの最新ニュースを、日本語で、わかりやすく。',
     description: 'ビットコインの最新ニュースを日本語で、わかりやすく。',
-    images: ['/btc-insight-logo.png'],
+    images: ['/no-image.png'],
   },
 };
 
