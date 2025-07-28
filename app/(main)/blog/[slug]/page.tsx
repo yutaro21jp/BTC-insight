@@ -125,8 +125,8 @@ export default async function PostPage({ params }: Props) {
               },
             },
             list: {
-              bullet: ({children}) => <ul className="list-disc list-inside mb-4 pl-5">{children}</ul>,
-              number: ({children}) => <ol className="list-decimal list-inside mb-4 pl-5">{children}</ol>,
+              bullet: ({children}) => <ul className="list-disc list-inside mb-4 pl-5 text-lg">{children}</ul>,
+              number: ({children}) => <ol className="list-decimal list-inside mb-4 pl-5 text-lg">{children}</ol>,
             },
             listItem: ({children}) => <li className="mb-2">{children}</li>,
             types: {
@@ -226,7 +226,7 @@ export default async function PostPage({ params }: Props) {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.84-6.317-6.109 6.317H.727l8.49-9.71L0 1.154h7.594l4.95 5.359L18.901 1.153zm-.742 19.14L6.67 3.08H4.41l13.17 17.19h2.26z"></path></svg>
         </a>
         <a
-          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(process.env.NEXT_PUBLIC_BASE_URL + '/blog/' + post.slug.current)}`}
+          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(`${post.title} ${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug.current}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold p-2 rounded-lg flex items-center justify-center w-10 h-10"
