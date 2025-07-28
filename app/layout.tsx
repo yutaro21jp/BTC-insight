@@ -1,6 +1,8 @@
+import type { Metadata } from 'next';
 import './globals.css';
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   title: 'BTCインサイト',
   description: 'ビットコインの最新ニュースを日本語で、わかりやすく。',
   icons: {
