@@ -125,8 +125,8 @@ export default async function PostPage({ params }: Props) {
               },
             },
             list: {
-              bullet: ({children}) => <ul className="list-disc list-inside mb-4 pl-5 text-lg">{children}</ul>,
-              number: ({children}) => <ol className="list-decimal list-inside mb-4 pl-5 text-lg">{children}</ol>,
+              bullet: ({children}) => <ul className="list-disc list-outside mb-4 pl-5 text-lg">{children}</ul>,
+              number: ({children}) => <ol className="list-decimal list-outside mb-4 pl-5 text-lg">{children}</ol>,
             },
             listItem: ({children}) => <li className="mb-2">{children}</li>,
             types: {
