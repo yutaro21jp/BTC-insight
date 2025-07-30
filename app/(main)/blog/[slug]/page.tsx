@@ -5,9 +5,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { Tweet } from 'react-tweet'
 
-type Props = {
-  params: { slug: string }
-}
+
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPostBySlug(params.slug)

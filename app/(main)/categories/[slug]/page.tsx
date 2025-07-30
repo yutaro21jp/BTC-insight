@@ -5,9 +5,7 @@ import { Metadata } from 'next'
 
 export const revalidate = 60 // ISRで1分更新
 
-type Props = {
-  params: { slug: string }
-}
+
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const categorySlug = params.slug
