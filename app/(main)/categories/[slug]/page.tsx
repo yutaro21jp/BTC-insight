@@ -9,7 +9,7 @@ type Props = {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const categorySlug = params.slug
   const category = await getCategoryBySlug(categorySlug)
 
@@ -54,7 +54,7 @@ type Post = {
   }
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: { params: { slug: string } }) {
   const categorySlug = params.slug
   const category = await getCategoryBySlug(categorySlug)
   const posts: Post[] = await getPostsByCategorySlug(categorySlug)

@@ -9,7 +9,7 @@ type Props = {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const tagSlug = params.slug
   const tag = await getTagBySlug(tagSlug)
 
@@ -54,7 +54,7 @@ type Post = {
   }
 }
 
-export default async function TagPage({ params }: Props) {
+export default async function TagPage({ params }: { params: { slug: string } }) {
   const tagSlug = params.slug
   const tag = await getTagBySlug(tagSlug)
   const posts: Post[] = await getPostsByTagSlug(tagSlug)
