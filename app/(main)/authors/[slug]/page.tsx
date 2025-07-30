@@ -5,11 +5,7 @@ import { Metadata } from 'next'
 
 export const revalidate = 60 // ISRで1分更新
 
-type Props = {
-  params: { slug: string }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const authorSlug = params.slug
   const author = await getAuthorBySlug(authorSlug)
 
@@ -54,7 +50,7 @@ type Post = {
   }
 }
 
-export default async function AuthorPage({ params }: Props) {
+export default async function AuthorPage({ params }: { params: { slug: string } }) {
   const authorSlug = params.slug
   const author = await getAuthorBySlug(authorSlug)
   const posts: Post[] = await getPostsByAuthorSlug(authorSlug)
