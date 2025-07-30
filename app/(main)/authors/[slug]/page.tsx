@@ -50,7 +50,7 @@ type Post = {
   }
 }
 
-
+export default async function AuthorPage({ params }: { params: { slug: string } }) {
   const authorSlug = params.slug
   const author = await getAuthorBySlug(authorSlug)
   const posts: Post[] = await getPostsByAuthorSlug(authorSlug)

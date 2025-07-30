@@ -5,8 +5,6 @@ import { Metadata } from 'next'
 
 export const revalidate = 60 // ISRで1分更新
 
-
-
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const tagSlug = params.slug
   const tag = await getTagBySlug(tagSlug)
