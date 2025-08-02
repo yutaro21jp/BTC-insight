@@ -1,5 +1,5 @@
 
-import { getPosts, getWelcomePost, urlFor } from '@/lib/sanity'
+import { getPosts, getWelcomePost, getHanseikaiExpoPost, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -21,11 +21,17 @@ type Post = {
 
 export default async function HomePage() {
   const welcomePost = await getWelcomePost()
-  const otherPosts = await getPosts(welcomePost ? "welcome" : undefined)
+  const hanseikaiExpoPost = await getHanseikaiExpoPost()
+  
+  const excludeSlugs = ['welcome', 'hanseikai-expo-2025']
+  const otherPosts = await getPosts(excludeSlugs)
 
   let posts: Post[] = []
   if (welcomePost) {
     posts.push(welcomePost)
+  }
+  if (hanseikaiExpoPost) {
+    posts.push(hanseikaiExpoPost)
   }
   posts = posts.concat(otherPosts.slice(0, 6 - posts.length))
 

@@ -19,8 +19,11 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
-export async function getPosts(excludeSlug?: string) {
-  const query = `*[_type == "post" ${excludeSlug ? `&& slug.current != "${excludeSlug}"` : ''}] | order(publishedAt desc){
+export async function getPosts(excludeSlugs?: string[]) {
+  const excludeFilter = excludeSlugs && excludeSlugs.length > 0
+    ? `&& ! (slug.current in [${excludeSlugs.map(s => `"${s}"`).join(', ')}])`
+    : ''
+  const query = `*[_type == "post" ${excludeFilter}] | order(publishedAt desc){
     _id,
     title,
     slug,
@@ -33,6 +36,18 @@ export async function getPosts(excludeSlug?: string) {
 
 export async function getWelcomePost() {
   const query = `*[_type == "post" && slug.current == "welcome"][0]{
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage
+  }`
+  return await client.fetch(query)
+}
+
+export async function getHanseikaiExpoPost() {
+  const query = `*[_type == "post" && slug.current == "hanseikai-expo-2025"][0]{
     _id,
     title,
     slug,
