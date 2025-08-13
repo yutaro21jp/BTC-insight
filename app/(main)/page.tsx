@@ -2,6 +2,7 @@
 import { getPosts, getWelcomePost, getHanseikaiExpoPost, urlFor } from '@/lib/sanity'
 import Link from 'next/link'
 import Image from 'next/image'
+import Timeline from '@/components/Timeline'
 
 export const revalidate = 60 // ISRで1分更新
 
@@ -80,6 +81,7 @@ export default async function HomePage() {
           ▶︎ ブログ記事をさらに見る
         </Link>
       </div>
+      <Timeline />
     </div>
   )
 }
