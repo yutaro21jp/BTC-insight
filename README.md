@@ -14,6 +14,7 @@ https://diamondhandscommunity.substack.com/t/btc-insight
 ## スポンサー
 - ビットコイン保有者向けの究極のハードウェアウォレット：Jade Plus 様
 - ビットコイン保有者向けの理想のモバイルウォレット：Blockstream App 様
+- ビットコイン関連商品がライトニング決済と匿名配送で買える：Lightning Base 様
 
 ## ロゴ
 <img src="/public/btc-insight-logo.png" alt="BTCインサイト" width="150" height="150">
