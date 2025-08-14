@@ -213,7 +213,7 @@ const timelineData = [
 ]
 
 export default function Timeline() {
-  const [openYears, setOpenYears] = useState<string[]>([])
+  const [openYears, setOpenYears] = useState<string[]>(timelineData.map(item => item.year))
 
   const toggleYear = (year: string) => {
     setOpenYears((prevOpenYears) =>
@@ -255,6 +255,9 @@ export default function Timeline() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="text-center mt-8 text-gray-600">
+        <p>ビットコイン歴史年表は現在進行中です。内容追加、編集等のご提案を<a href="https://github.com/yutaro21jp/btc-insight" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">GitHub</a>にてよろしくお願いいたします。</p>
       </div>
     </div>
   )
