@@ -224,21 +224,24 @@ export default function Timeline() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 mt-16 py-12 bg-gray-50 rounded-lg">
+    <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 pb-12 bg-gray-50 rounded-lg">
       <h2 className="text-3xl font-bold text-center mb-12 text-orange-500">ビットコイン歴史年表</h2>
       <div className="border-l-2 border-gray-200">
         {timelineData.map((item) => (
           <div key={item.year} className="relative">
-            <div className="absolute -left-[11px] top-0 h-full">
+            <div
+              onClick={() => toggleYear(item.year)}
+              className="absolute -left-[11px] top-0 h-full cursor-pointer"
+            >
               <div className="w-5 h-5 bg-white border-2 border-orange-300 rounded-full"></div>
             </div>
             <div className="ml-8">
-              <button
+              <div
                 onClick={() => toggleYear(item.year)}
-                className="text-xl font-bold w-full text-left focus:outline-none text-orange-500"
+                className="text-xl font-bold w-full text-left focus:outline-none text-orange-500 cursor-pointer"
               >
                 {item.year}
-              </button>
+              </div>
               {openYears.includes(item.year) && (
                 <div className="mt-4 mb-8">
                   {item.events.map((event, index) => (
