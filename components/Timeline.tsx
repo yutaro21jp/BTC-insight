@@ -257,7 +257,7 @@ export default function Timeline() {
         ))}
       </div>
       <div className="text-center mt-8 text-gray-600">
-        <p>ビットコイン歴史年表は現在進行中です。内容追加、編集等のご提案を<a href="https://github.com/yutaro21jp/btc-insight" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">GitHub</a>にてよろしくお願いいたします。</p>
+        <p>ビットコイン歴史年表は進化中です。新しい情報や改善案があれば、ぜひ<a href="https://github.com/yutaro21jp/btc-insight" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">GitHub</a>でご提案ください。</p>
       </div>
     </div>
   )
