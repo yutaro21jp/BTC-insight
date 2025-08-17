@@ -34,7 +34,7 @@ export default async function HomePage() {
   if (hanseikaiExpoPost) {
     posts.push(hanseikaiExpoPost)
   }
-  posts = posts.concat(otherPosts.slice(0, 6 - posts.length))
+  posts = posts.concat(otherPosts.slice(0, 12 - posts.length))
 
   return (
     <div className="max-w-7xl mx-auto px-4">
